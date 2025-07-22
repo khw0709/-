@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fibonacci 암호화기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #4a90e2;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 90%;
+      max-width: 500px;
+      height: 100px;
+      font-size: 18px;
+      padding: 10px;
+      border: 2px solid #4a90e2;
+      border-radius: 8px;
+      resize: none;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #357ABD;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>💎 Fibonacci 암호화기 💎</h1>
+  <textarea id="inputText" placeholder="한글 메시지를 입력하세요"></textarea><br>
+  <button onclick="encryptMessage()">🔐 암호화하기</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const 초성 = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+    const 중성 = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡㅣ";
+    const 종성 = ["", "ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ",
+                   "ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ",
+                   "ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+    function getFibonacci(n) {
+      if (n <= 2) return 1;
+      let a = 1, b = 1, temp;
+      for (let i = 3; i <= n; i++) {
+        temp = a + b;
+        a = b;
+        b = temp;
+      }
+      return b;
+    }
+    function hangulToNumbers(char) {
+      const code = char.charCodeAt(0) - 0xAC00;
+      if (code < 0 || code > 11172) return []; // 한글 아님
+      const 초 = Math.floor(code / 588);
+      const 중 = Math.floor((code % 588) / 28);
+      const 종 = code % 28;
+      return [초, 중, 종];
+    }
+    function encryptMessage() {
+      const input = document.getElementById("inputText").value;
+      let result = "";
+      let count = 1;
+      for (let char of input) {
+        let nums = hangulToNumbers(char);
+        if (nums.length === 0) continue; // 한글 외 문자 무시
+        for (let num of nums) {
+          let fib = getFibonacci(count);
+          let encrypted = (num + fib) % 26;
+          result += String.fromCharCode(65 + encrypted); // A=65
+          count++;
+        }
+      }
+      document.getElementById("result").innerText = `📄 암호문: ${result}`;
+    }
+  </script>
+</body>
+</html>
