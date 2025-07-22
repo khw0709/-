@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>나만의 암호 만들기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main">
+    <h1>🔐 나만의 암호 만들기</h1>
+    <p>수열 유형 선택:</p>
+    <select id="seqType" onchange="toggleInputs()">
+      <option value="arithmetic">등차수열</option>
+      <option value="geometric">등비수열</option>
+      <option value="custom">점화식 직접 입력</option>
+    </select>
+    <div id="arithmeticGeometricInputs">
+      <input type="number" id="startValue" placeholder="시작값 (예: 2)"><br>
+      <input type="number" id="commonValue" placeholder="공차/공비 (예: 3)"><br>
+    </div>
+    <div id="customFormulaInput" style="display:none;">
+      <input type="text" id="customFormula" placeholder="점화식 (예: prev*2+1)">
+      <button onclick="loadExample()">예제 불러오기</button>
+      <p style="font-size:small;">prev는 이전 항을 의미합니다.</p>
+    </div>
+    <textarea id="customInputText" placeholder="한글 메시지를 입력하세요"></textarea><br>
+    <button onclick="encryptCustom()">암호화하기</button>
+    <p class="result" id="customResult"></p>
+    <button onclick="location.href='index.html'">🏠 메인으로</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

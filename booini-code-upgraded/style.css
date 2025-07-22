@@ -1,0 +1,28 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1518241353330-bd041e0bde72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.main {
+  text-align: center;
+}
+button {
+  margin: 10px;
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
